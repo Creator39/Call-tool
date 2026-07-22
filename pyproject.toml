@@ -1,0 +1,13 @@
+[project]
+name = "call_me_maybe"
+version = "0.1.0"
+description = "LLM SDK for local model inference"
+requires-python = ">=3.14"
+dependencies = [
+    "pydantic>=2.13.4",
+    "scikit-learn>=1.9.0",
+    "llm-sdk",
+]
+
+[tool.uv.sources]
+llm-sdk = {path = "llm_sdk", editable = true}
