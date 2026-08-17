@@ -23,8 +23,8 @@ def load_function_catalog(path: str) -> FunctionCatalog:
     return function_catalog
 
 def main():
-    load = load_function_catalog("data/input/functions_definition.json")
-    for i in load.functions:
+    load_function = load_function_catalog("data/input/functions_definition.json")
+    for i in load_function.functions:
         print(i)
 if __name__ == "__main__":
     main()
