@@ -2,10 +2,11 @@
 name = "call_me_maybe"
 version = "0.1.0"
 description = "LLM SDK for local model inference"
-requires-python = ">=3.14"
+requires-python = ">=3.10"
 dependencies = [
     "pydantic>=2.13.4",
-    "scikit-learn>=1.9.0",
+    "scikit-learn>=1.9.0; python_version >= '3.11'",
+    "scikit-learn>=1.5.0; python_version < '3.11'",
     "llm-sdk",
 ]
 
