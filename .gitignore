@@ -1,5 +1,2 @@
+# pycache files in src
 src/__pycache__/
-src/vocab/__pycache__/
-src/fsm/__pycache__/
-src/generation/__pycache__/
-rc/models/__pycache__/
