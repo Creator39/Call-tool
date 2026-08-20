@@ -29,17 +29,3 @@ def load_function_catalog(path: str) -> FunctionCatalog:
     functions_definition = take_functions_definition(path)
     function_catalog = FunctionCatalog.model_validate({ "functions": functions_definition })
     return function_catalog
-
-def load_vocab_inverse(path: str) -> dict:
-    """
-    Load the inverted vocabulary from a JSON file.
-
-    Args:
-        path (str): The path to the JSON file containing the vocabulary.
-
-    Returns:
-        dict: An inverted vocabulary dictionary, mapping token IDs to their corresponding text.
-    """
-    with open(path, "r", encoding='utf-8') as f:
-        vocab = json.load(f)
-    return {v: k for k, v in vocab.items()}
