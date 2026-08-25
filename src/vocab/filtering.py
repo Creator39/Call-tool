@@ -29,6 +29,22 @@ def is_plausible_number_token(token: str) -> bool:
     allowed_chars = set("0123456789.-,}")
     return all(char in allowed_chars for char in token)
 
+def is_plausible_string_token(token: str) -> bool:
+    """
+    Only double quotes are not allowed in string tokens, as they are used to delimit the string.
+    
+    Args:
+        token (str): The token to check.
+    Returns:
+        bool: True if the token is a plausible string token, False otherwise.
+    """
+    forbidden_chars = set('\\”')
+    return all(char not in forbidden_chars for char in token)
+
+def is_plausible_boolean_token(token: str) -> bool:
+    allowed_chars = {c for char in ["true", "false"] for c in char}
+    return all(c in allowed_chars for c in token)
+
 def build_plausible_vocab(dico_inverse: dict[int,str],
                           is_plausible_token: Callable[[str], bool]) -> dict[int,str]:
     """
@@ -45,15 +61,3 @@ def build_plausible_vocab(dico_inverse: dict[int,str],
         for token_id, token_text in dico_inverse.items() 
         if is_plausible_token(token_text)
     }
-
-def is_plausible_string_token(token: str) -> bool:
-    """
-    Only double quotes are not allowed in string tokens, as they are used to delimit the string.
-    
-    Args:
-        token (str): The token to check.
-    Returns:
-        bool: True if the token is a plausible string token, False otherwise.
-    """
-    forbidden_chars = set('\\”')
-    return all(char not in forbidden_chars for char in token)

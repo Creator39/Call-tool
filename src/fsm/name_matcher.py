@@ -51,7 +51,7 @@ def allowed_token_ids_for_token(partial_text: str,
                 allowed_set.add(token_id)
     return allowed_set
 
-def name_function(full_prefix: str,
+def name_matcher(full_prefix: str,
                  noms_valides: list[str],
                  plausible_vocab: dict[int,str],
                  model: Small_LLM_Model) -> str:

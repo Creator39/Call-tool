@@ -4,6 +4,7 @@ sys.path.insert(0, "..")
 
 from src.generation.decoding import mask_logits, select_next_token
 from llm_sdk import Small_LLM_Model
+from src.fsm.name_matcher import name_matcher
 
 def allowed_chars_for_number(partial_value: str) -> set[str]:
     """
@@ -99,3 +100,20 @@ def generate_string_value(
             break
         partial_value += (token_text or "")
     return partial_value
+
+def generate_boolean_value(full_prefix: str,
+                           plausible_vocab: dict[int, str],
+                           model: Small_LLM_Model) -> str:
+    """
+    Generate a boolean value ("true" or "false") based on the given full_prefix.
+
+    Args:
+        full_prefix (str): The prefix string to guide the generation.
+        plausible_vocab (dict[int, str]): A dictionary mapping token IDs to plausible boolean tokens.
+        model (Small_LLM_Model): The language model used for generation.
+
+    Returns:
+        str: The generated boolean value ("true" or "false").
+    """
+    raw_text = name_matcher(full_prefix,["true", "false"], plausible_vocab, model)
+    return raw_text[len(full_prefix):-1]
