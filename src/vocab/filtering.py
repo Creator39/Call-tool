@@ -45,3 +45,15 @@ def build_plausible_vocab(dico_inverse: dict[int,str],
         for token_id, token_text in dico_inverse.items() 
         if is_plausible_token(token_text)
     }
+
+def is_plausible_string_token(token: str) -> bool:
+    """
+    Only double quotes are not allowed in string tokens, as they are used to delimit the string.
+    
+    Args:
+        token (str): The token to check.
+    Returns:
+        bool: True if the token is a plausible string token, False otherwise.
+    """
+    forbidden_chars = set('\\”')
+    return all(char not in forbidden_chars for char in token)

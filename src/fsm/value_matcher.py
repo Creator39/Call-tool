@@ -42,7 +42,8 @@ def allowed_token_ids_for_number(partial_value: str, plausible_vocab: dict[int, 
 def generate_number_value(
     full_prefix: str,
     plausible_vocab: dict[int, str],
-    model: Small_LLM_Model)-> str:
+    model: Small_LLM_Model
+    )-> str:
     """
     Generate a number value that matches the allowed characters for a number token, given a full prefix.
 
@@ -68,4 +69,33 @@ def generate_number_value(
             break
         
         partial_value += token_text
+    return partial_value
+
+def generate_string_value(
+        full_prefix: str,
+        plausible_vocab: dict[int, str],
+        model: Small_LLM_Model,
+    ) -> str:
+    """
+    Generate a string value for parameter of type string json and semantically correct with function definition.
+    
+    Args:
+        full_prefix (str): The prefix string to condition the generation on.
+        plausible_vocab (set): A set of plausible tokens for the generation.
+        model (Small_LLM_Model): The language model used for generation.
+    Returns:
+        str: The generated string value.
+    """
+    partial_value = ""
+    allowed_token = set(plausible_vocab)
+    while True:
+        full_text = full_prefix + partial_value
+        input_ids = model.encode(full_text).tolist()[0]
+        logits = model.get_logits_from_input_ids(input_ids)
+        mask = mask_logits(allowed_token, logits)
+        best_id = select_next_token(mask)
+        token_text = plausible_vocab.get(best_id, "")
+        if '"' in token_text:
+            break
+        partial_value += (token_text or "")
     return partial_value
