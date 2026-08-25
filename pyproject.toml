@@ -17,4 +17,5 @@ llm-sdk = {path = "llm_sdk", editable = true}
 dev = [
     "pytest>=9.1.1",
     "tox>=4.60.0",
+    "tox-uv>=1.36.0",
 ]
