@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, "../..")
 
 import json
-from src.models.functiondef import FunctionCatalog
+from src.models.functiondef import FunctionCatalog, FunctionDefinition
 
 def take_functions_definition(path: str) -> dict:
     """
@@ -29,3 +29,12 @@ def load_function_catalog(path: str) -> FunctionCatalog:
     functions_definition = take_functions_definition(path)
     function_catalog = FunctionCatalog.model_validate({ "functions": functions_definition })
     return function_catalog
+
+def what_function_are_calling(partial_text: str, catalog: FunctionCatalog) -> FunctionDefinition:
+    """
+    Given a partial text, determine which function is being called from the catalog.
+    """
+    for function in catalog.functions:
+        if function.name == partial_text:
+            return function
+    raise ValueError("No matching function found.")
