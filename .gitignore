@@ -4,6 +4,9 @@ src/models/__pycache__/
 src/vocab/__pycache__/
 src/fsm/__pycache__/
 src/generation/__pycache__/
+
+# Ignore virtual environment folders
+venv/
 .tox
 build
 src/call_me_maybe.egg-info
