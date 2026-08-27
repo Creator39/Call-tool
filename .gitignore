@@ -8,4 +8,3 @@ src/generation/__pycache__/
 build
 src/call_me_maybe.egg-info
 .python-version
-llm_sdk
