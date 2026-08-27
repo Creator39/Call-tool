@@ -38,3 +38,8 @@ def what_function_are_calling(partial_text: str, catalog: FunctionCatalog) -> Fu
         if function.name == partial_text:
             return function
     raise ValueError("No matching function found.")
+
+def build_function_definition(catalog: FunctionCatalog) -> str:
+    """Build a string representation of the function definitions in the catalog."""
+    description = [f"- {f.name}: {f.description}" for f in catalog.functions]
+    return "\n".join(description)
